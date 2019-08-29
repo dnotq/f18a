@@ -1,0 +1,110 @@
+#
+# F18A
+#   A pin-compatible enhanced replacement for the TMS9918A VDP family.
+#   https://dnotq.io
+#
+
+# Released under the 3-Clause BSD License:
+#
+# Copyright 2011-2018 Matthew Hagerty (matthew <at> dnotq <dot> io)
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice,
+# this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+# contributors may be used to endorse or promote products derived from this
+# software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# Version history.  See README.md for details.
+#
+#   V1.9 Dec 31, 2018
+#   V1.8 Aug 24, 2016
+#   V1.7 Jan  1, 2016
+#   V1.6 May  3, 2014 .. Apr 26, 2015
+#   V1.5 Jul 23, 2013
+#   V1.4 Mar 20, 2013 .. Apr 26, 2013
+#   V1.3 Jul 26, 2012, Release firmware
+
+#
+# Pin assignments for Spartan-3E, 250K/500K, 100-pin QFP on the F18A V1.3 PCB.
+#
+
+NET "clk_50m0_net" TNM_NET = "clk_ref_grp" ;
+TIMESPEC "TS_clk" = PERIOD "clk_ref_grp" 20.0ns HIGH 50% ;
+NET "clk_50m0_net" LOC = "P83" | IOSTANDARD = LVCMOS33 ;
+
+# SPI
+NET "spi_cs_net"        LOC = "P24" | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 6 ;
+NET "spi_mosi_net"      LOC = "P27" | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 6 ;
+NET "spi_miso_net"      LOC = "P44" | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 6 ;
+NET "spi_clk_net"       LOC = "P50" | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 6 ;
+
+# User header
+NET "usr1_net"     LOC = "P11" | IOSTANDARD = LVTTL | PULLUP ;
+NET "usr2_net"     LOC = "P12" | IOSTANDARD = LVTTL | PULLUP ;
+NET "usr3_net"     LOC = "P15" | IOSTANDARD = LVTTL | PULLUP ;
+NET "usr4_net"     LOC = "P16" | IOSTANDARD = LVTTL | PULLUP ;
+
+# VGA 4-bit color output
+# 0-bit == MSB
+NET "red_net<0>"   LOC = "P53" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "red_net<1>"   LOC = "P54" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "red_net<2>"   LOC = "P57" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "red_net<3>"   LOC = "P58" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+NET "grn_net<0>"   LOC = "P60" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "grn_net<1>"   LOC = "P61" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "grn_net<2>"   LOC = "P62" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "grn_net<3>"   LOC = "P63" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+NET "blu_net<0>"   LOC = "P65" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "blu_net<1>"   LOC = "P66" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "blu_net<2>"   LOC = "P67" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "blu_net<3>"   LOC = "P68" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+NET "hsync_net"    LOC = "P70" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "vsync_net"    LOC = "P71" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+# Composite video
+#NET "cv_lsb_net"  LOC = "P32" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+#NET "cv_msb_net"  LOC = "P33" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+
+# Required connections to interface a real computer system.
+NET "clk_grom_net" LOC = "P22" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+NET "clk_cpu_net"  LOC = "P23" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+NET "reset_n_net"  LOC = "P86" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+
+NET "mode_net"     LOC = "P89" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "csw_n_net"    LOC = "P90" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "csr_n_net"    LOC = "P88" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "int_n_net"    LOC = "P84" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 12 ;
+
+NET "cd_net<0>"    LOC = "P5"  | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<1>"    LOC = "P4"  | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<2>"    LOC = "P3"  | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<3>"    LOC = "P2"  | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<4>"    LOC = "P95" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<5>"    LOC = "P94" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<6>"    LOC = "P92" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
+NET "cd_net<7>"    LOC = "P91" | IOSTANDARD = LVTTL | SLEW = FAST | DRIVE = 8 ;
